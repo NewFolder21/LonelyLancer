@@ -1,21 +1,28 @@
 package com.vital.screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.vital.renders.MapRender;
 
 /**
  * Created by vitaliy on 18.02.15.
  */
 public class GameScreen implements Screen {
-
+    OrthographicCamera cam;
     SpriteBatch batch;
     Texture texture;
+    MapRender mapRender;
 
     public GameScreen(){
         batch = new SpriteBatch();
-        texture = new Texture("textures/green.jpg");
-
+        texture = new Texture("textures/green.png");
+        mapRender = new MapRender(batch);
+        cam = new OrthographicCamera(1280, 1280);
+        cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
     }
 
     @Override
@@ -25,9 +32,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        batch.begin();
-        batch.draw(texture, 150, 150);
-        batch.end();
+        mapRender.draw();
     }
 
     @Override

@@ -7,6 +7,8 @@ import com.vital.MainGameClass;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.height = 680;
+        config.width = 680;
 		new LwjglApplication(new MainGameClass(), config);
 	}
 }
